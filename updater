@@ -34,7 +34,7 @@
 async function checkForUpdates() {
     try {
         const currentVersion = "1.1"; 
-        const updateURL = "https://raw.githubusercontent.com/windowsisoplanetxxx/ext/main/script.user.js?" + Date.now();
+        const updateURL = "https://raw.githubusercontent.com/windowsisoplanetxxx/ext/refs/heads/main/updater?" + Date.now();
 
         const response = await fetch(updateURL);
         const scriptText = await response.text();
