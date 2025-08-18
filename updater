@@ -30,25 +30,33 @@
         {code: "dk-da", name: "Danish (Denmark)"}
     ];
 
-    // Add to your script header:
-// @updateURL    https://raw.githubusercontent.com/yourusername/yourrepo/main/script.user.js
-// @downloadURL  https://raw.githubusercontent.com/yourusername/yourrepo/main/script.user.js
 
 async function checkForUpdates() {
     try {
-        const currentVersion = "4.6"; // Your current version
-        const updateURL = "https://raw.githubusercontent.com/yourusername/yourrepo/main/version.json";
+        const currentVersion = "1.0"; // Your current version
+        const updateURL = "https://raw.githubusercontent.com/windowsisoplanetxxx/ext/main/script.user.js";
 
         const response = await fetch(updateURL);
-        const updateInfo = await response.json();
+        const scriptText = await response.text();
 
-        if (updateInfo.version > currentVersion) {
-            showUpdateNotification(updateInfo);
+        // Look for "@version x.x"
+        const match = scriptText.match(/@version\s+([0-9.]+)/);
+
+        if (match) {
+            const latestVersion = match[1];
+            console.log("Latest version:", latestVersion);
+
+            if (latestVersion > currentVersion) {
+                showUpdateNotification({ version: latestVersion });
+            }
+        } else {
+            console.log("No @version found in script.");
         }
     } catch (error) {
         console.log("Update check failed:", error);
     }
 }
+
 
 function showUpdateNotification(updateInfo) {
     const notification = document.createElement("div");
