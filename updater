@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         HP Support Video Extractor
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Extract video links/thumbnails across multiple HP support languages
 // @match        https://support.hp.com/*/document/ish_*
 // @match        https://support.hp.com/*/error/*
@@ -34,14 +34,10 @@
 async function checkForUpdates() {
     try {
         const currentVersion = "1.0"; // Your current version
-        const updateURL = "https://raw.githubusercontent.com/windowsisoplanetxxx/ext/main/script.user.js";
-
+        const updateURL = "https://raw.githubusercontent.com/windowsisoplanetxxx/ext/refs/heads/main/updater";
         const response = await fetch(updateURL);
         const scriptText = await response.text();
-
-        // Look for "@version x.x"
         const match = scriptText.match(/@version\s+([0-9.]+)/);
-
         if (match) {
             const latestVersion = match[1];
             console.log("Latest version:", latestVersion);
